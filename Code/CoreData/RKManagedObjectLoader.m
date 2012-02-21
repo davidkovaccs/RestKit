@@ -145,7 +145,7 @@
     
     // If the response was successful, save the store...
     if ([self.response isSuccessful]) {
-        [self deleteCachedObjectsMissingFromResult:result];
+        //[self deleteCachedObjectsMissingFromResult:result];
         NSError* error = [self.objectStore save];
         if (error) {
             RKLogError(@"Failed to save managed object context after mapping completed: %@", [error localizedDescription]);
