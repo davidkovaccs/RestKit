@@ -27,7 +27,7 @@
     NSURL *_url;
     NSString *_boolString;
     NSDate *_date;
-    NSOrderedSet *_orderedSet;
+    //NSOrderedSet *_orderedSet;
     NSArray *_array;
 }
 
@@ -35,7 +35,7 @@
 @property (nonatomic, retain) NSString *boolString;
 @property (nonatomic, retain) NSNumber *boolNumber;
 @property (nonatomic, retain) NSDate *date;
-@property (nonatomic, retain) NSOrderedSet *orderedSet;
+//@property (nonatomic, retain) NSOrderedSet *orderedSet;
 @property (nonatomic, retain) NSArray *array;
 
 @end
@@ -147,37 +147,37 @@
     [operation release];
 }
 
-- (void)testShouldSuccessfullyMapArraysToOrderedSets {
-    RKObjectMapping* mapping = [RKObjectMapping mappingForClass:[TestMappable class]];
-    [mapping mapKeyPath:@"numbers" toAttribute:@"orderedSet"];
-    TestMappable* object = [[[TestMappable alloc] init] autorelease];
-    
-    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:@"application/json"];
-    id data = [parser objectFromString:@"{\"numbers\":[1, 2, 3]}" error:nil];
-    
-    RKObjectMappingOperation* operation = [[RKObjectMappingOperation alloc] initWithSourceObject:data destinationObject:object mapping:mapping];
-    BOOL success = [operation performMapping:nil];
-    assertThatBool(success, is(equalToBool(YES)));
-    NSOrderedSet *expectedSet = [NSOrderedSet orderedSetWithObjects:[NSNumber numberWithInt:1], [NSNumber numberWithInt:2], [NSNumber numberWithInt:3], nil];
-    assertThat(object.orderedSet, is(equalTo(expectedSet)));
-    [operation release];
-}
-
-- (void)testShouldSuccessfullyMapOrderedSetsToArrays {
-    RKObjectMapping* mapping = [RKObjectMapping mappingForClass:[TestMappable class]];
-    [mapping mapKeyPath:@"orderedSet" toAttribute:@"array"];
-    TestMappable* object = [[[TestMappable alloc] init] autorelease];
-    
-    TestMappable* data = [[[TestMappable alloc] init] autorelease];
-    data.orderedSet = [NSOrderedSet orderedSetWithObjects:[NSNumber numberWithInt:1], [NSNumber numberWithInt:2], [NSNumber numberWithInt:3], nil];
-    
-    RKObjectMappingOperation* operation = [[RKObjectMappingOperation alloc] initWithSourceObject:data destinationObject:object mapping:mapping];
-    BOOL success = [operation performMapping:nil];
-    assertThatBool(success, is(equalToBool(YES)));
-    NSArray* expectedArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:1], [NSNumber numberWithInt:2], [NSNumber numberWithInt:3], nil];
-    assertThat(object.array, is(equalTo(expectedArray)));
-    [operation release];
-}
+//- (void)testShouldSuccessfullyMapArraysToOrderedSets {
+//    RKObjectMapping* mapping = [RKObjectMapping mappingForClass:[TestMappable class]];
+//    [mapping mapKeyPath:@"numbers" toAttribute:@"orderedSet"];
+//    TestMappable* object = [[[TestMappable alloc] init] autorelease];
+//    
+//    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:@"application/json"];
+//    id data = [parser objectFromString:@"{\"numbers\":[1, 2, 3]}" error:nil];
+//    
+//    RKObjectMappingOperation* operation = [[RKObjectMappingOperation alloc] initWithSourceObject:data destinationObject:object mapping:mapping];
+//    BOOL success = [operation performMapping:nil];
+//    assertThatBool(success, is(equalToBool(YES)));
+//   // NSOrderedSet *expectedSet = [NSOrderedSet orderedSetWithObjects:[NSNumber numberWithInt:1], [NSNumber numberWithInt:2], [NSNumber numberWithInt:3], nil];
+//    assertThat(object.orderedSet, is(equalTo(expectedSet)));
+//    [operation release];
+//}
+//
+//- (void)testShouldSuccessfullyMapOrderedSetsToArrays {
+//    RKObjectMapping* mapping = [RKObjectMapping mappingForClass:[TestMappable class]];
+//    [mapping mapKeyPath:@"orderedSet" toAttribute:@"array"];
+//    TestMappable* object = [[[TestMappable alloc] init] autorelease];
+//    
+//    TestMappable* data = [[[TestMappable alloc] init] autorelease];
+//    data.orderedSet = [NSOrderedSet orderedSetWithObjects:[NSNumber numberWithInt:1], [NSNumber numberWithInt:2], [NSNumber numberWithInt:3], nil];
+//    
+//    RKObjectMappingOperation* operation = [[RKObjectMappingOperation alloc] initWithSourceObject:data destinationObject:object mapping:mapping];
+//    BOOL success = [operation performMapping:nil];
+//    assertThatBool(success, is(equalToBool(YES)));
+//    NSArray* expectedArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:1], [NSNumber numberWithInt:2], [NSNumber numberWithInt:3], nil];
+//    assertThat(object.array, is(equalTo(expectedArray)));
+//    [operation release];
+//}
 
 - (void)testShouldFailTheMappingOperationIfKeyValueValidationSetsAnError {
     RKObjectMapping* mapping = [RKObjectMapping mappingForClass:[TestMappable class]];
