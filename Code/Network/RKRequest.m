@@ -237,7 +237,10 @@
     }
     
     // Add authentication headers so we don't have to deal with an extra cycle for each message requiring basic auth.
+    NSLog(@"Tryin to add Http auth headers to request: %d %@ %@", self.authenticationType == RKRequestAuthenticationTypeHTTPBasic, _username, _password);
+    
     if (self.authenticationType == RKRequestAuthenticationTypeHTTPBasic && _username && _password) {
+        NSLog(@"Adding Http auth headers to request");
         CFHTTPMessageRef dummyRequest = CFHTTPMessageCreateRequest(kCFAllocatorDefault, (CFStringRef)[self HTTPMethod], (CFURLRef)[self URL], kCFHTTPVersion1_1);
         if (dummyRequest) {
           CFHTTPMessageAddAuthentication(dummyRequest, nil, (CFStringRef)_username, (CFStringRef)_password,kCFHTTPAuthenticationSchemeBasic, FALSE);
