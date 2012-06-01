@@ -160,7 +160,7 @@
 
     // If the response was successful, save the store...
     if ([self.response isSuccessful]) {
-        //[self deleteCachedObjectsMissingFromResult:result];
+        [self deleteCachedObjectsMissingFromResult:result];
         NSError *error = nil;
         BOOL success = [self.objectStore save:&error];
         if (! success) {
